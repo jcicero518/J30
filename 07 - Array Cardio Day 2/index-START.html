@@ -9,6 +9,10 @@
   <script>
     // ## Array Cardio Day 2
 
+    function atLeast19( obj ) {
+      return (new Date().getFullYear() - obj.year);
+    }
+
     const people = [
       { name: 'Wes', year: 1988 },
       { name: 'Kait', year: 1986 },
@@ -26,15 +30,38 @@
 
     // Some and Every Checks
     // Array.prototype.some() // is at least one person 19 or older?
+    let some = people.some( atLeast19 );
+    console.log(some, 'some');
+    let some2 = people.some( p => new Date().getFullYear() - p.year );
+    console.log( {some2}, 'some2');
+
     // Array.prototype.every() // is everyone 19 or older?
+    let every = people.every( p => ( ( new Date().getFullYear() ) - p.year ) >= 19 );
+    console.log(every, 'every');
 
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
 
+    let find = comments.find( comment => comment.id === 823423 );
+    console.log( find, 'find');
+
     // Array.prototype.findIndex()
     // Find the comment with this ID
     // delete the comment with the ID of 823423
+
+    let findIndex = comments.findIndex( comment => comment.id === 823423 );
+    //delete comments[findIndex];
+    console.log(comments, 'comms');
+
+    //let newComments = comments.splice( findIndex, 1 );
+    //console.log(newComments, 'new comms, return array obj with just this index');
+
+    let newerComments = [
+    	...comments.slice(0, findIndex), // array values up to found index X
+        ...comments.slice(findIndex + 1) // array values of index X + 1 until all values are read
+    ];
+    console.log(newerComments, 'newer comms with spread operator / slice');
 
   </script>
 </body>
